@@ -1,0 +1,45 @@
+standard
+A -> B -> C ->D            D -> C -> B -> A
+
+singletop
+in old task
+if (new activity already in top) {
+    keep old activity, and do not create a new activity,
+    transform data in OnNewIntent()
+} else{
+    new an activity to top of task,as stanard
+}
+
+
+
+singleTask
+in old task
+if (new activity already in top) {
+    keep old activity, and do not create a new activity,
+    clear head of the old activity,
+    transform data in OnNewIntent()
+} else{
+    creates an activity to top of task,as standard
+}
+
+
+
+singleInstance
+new a task,
+creates a new taskB,new activityB was in root of taskB,
+if new activityB goes to standard activityC, the new activityC was created in old task,
+then if press back, go to ActivityA,then if press back, go to new Task's ActivityB
+
+
+
+
+I found google said WRONG:
+"singleTask"
+The system creates a new task and instantiates the activity at the root of the new task. However, if an instance of the activity already exists in a separate task, the system routes the intent to the existing instance through a call to its onNewIntent() method, rather than creating a new instance. Only one instance of the activity can exist at a time.
+Note: Although the activity starts in a new task, the Back button still returns the user to the previous activity.
+
+SingleTask does not create a new task, in my Test Case,
+Test method:
+adb shell dumpsys activity activities | grep "*"
+
+
